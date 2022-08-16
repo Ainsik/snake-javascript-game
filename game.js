@@ -10,7 +10,7 @@ let table = {
 
 let snake = {
     direction: "right",
-    position: [[9,10],[10,10]],
+    position: [[10,10]],
     food: 0, 
     score: 0, 
     time: 0,
@@ -18,7 +18,7 @@ let snake = {
     interval: 100,
     init: function () {
         snake.direction = "right";
-        snake.position = [[9,10],[10,10]];
+        snake.position = [[10,10]];
         snake.interval = 100;
         snake.food = 0;
         snake.score = 0;
@@ -30,7 +30,13 @@ let snake = {
  };
 
  snake.init();
- 
+// render snake
+function renderSnake() {
+    for(let i = 0; i < snake.position.length; i++) {
+        boxes[snake.position[i][0] + snake.position[i][1] * table.rowsColumns].classList.add("snake");
+    };
+};
+
 // creating table
 function createTable(){
     if(snakeBoard.innerHTML === "") {
@@ -42,9 +48,3 @@ function createTable(){
     };
 };
 
-// render snake
-function renderSnake() {
-    for(let i = 0; i < snake.position.length; i++) {
-        boxes[snake.position[i][0] + snake.position[i][1] * table.rowsColumns].classList.add("snake");
-    };
-};
