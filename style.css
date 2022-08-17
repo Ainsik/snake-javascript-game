@@ -28,3 +28,7 @@
   .snake{
     background: rgb(208, 10, 10);
   }
+
+  .food{
+    background: blue;
+  }
