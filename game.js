@@ -2,6 +2,7 @@ let snakeBoard = document.querySelector(".snakeBoard");
 let boxes = document.getElementsByClassName("box");
 let modul = document.querySelector('.modul');
 let start = document.querySelector('.start')
+let interval = 0
 
 let table = {
     rowsColumns: 21,
@@ -67,7 +68,7 @@ function randomFood() {
 
 function intervalMove()
 {
-    setInterval(function (){
+   interval = setInterval(function (){
         move();
     },snake.interval)
 }
@@ -80,29 +81,27 @@ function move() {
 }
 function checkColissionWithFood(){
     let head = snake.position[snake.position.length - 1];
-    console.log(head)
     if (boxes[head[0] + head[1] * table.rowsColumns].classList.contains("food")){
         boxes[head[0] + head[1] * table.rowsColumns].classList.remove("food");
-        console.log("colission");
         snake.position.unshift(snake.position[0]);
-        console.log(snake.position);
         randomFood();
     }
     for (let i=0;  i<snake.position.length-1;i++) {
         if (boxes[snake.position[i][0] + snake.position[i][1] * table.rowsColumns] === boxes[head[0] + head[1] * table.rowsColumns]) {
            alert("You lose!");
+           clearInterval(interval);
+        for(let i = 0; i < snake.position.length; i++) {
+        boxes[snake.position[i][0] + snake.position[i][1] * table.rowsColumns].classList.remove("snake");
+    }   ;
         }
     }
 }
 
 
 function updatePostion() {
-    console.log(snake.position);
     boxes[snake.position[0][0] + snake.position[0][1] * table.rowsColumns].classList.remove("snake");
-    console.log(boxes[(snake.position[0][0] + snake.position[0][1]) * table.rowsColumns]);
     snake.position.shift();
-    var head = snake.position[snake.position.length - 1]; 
-    console.log(head)
+    var head = snake.position[snake.position.length - 1];
     if(snake.direction === "left"){
         snake.position.push([head[0] - 1, head[1]])
     }
@@ -118,7 +117,6 @@ function updatePostion() {
     else{
         console.log("wrong dir")
     }
-    console.log(snake.position)
 };
 
 
