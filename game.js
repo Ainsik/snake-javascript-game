@@ -10,7 +10,7 @@ let table = {
 
 let snake = {
     direction: "right",
-    position: [[10,10]],
+    position: [[9,10],[10,10]],
     food: 0, 
     score: 0, 
     time: 0,
@@ -74,9 +74,23 @@ function move() {
 
 
 
+function hitBorder() {
+  var headPos = snake.position.length-1;
+  // goes of limits
+  if (((snake.position[headPos][0] === table.rowsCols-1) && (snake.direction === "right")) || ((snake.position[headPos][0] === 0) && (snake.direction === "left")) || ((snake.position[headPos][1] === table.rowsCols-1) && (snake.direction === "down")) ||  ((snake.position[headPos][1] === 0) && (snake.direction === "up"))) {
+ 
+
+        // tutaj wywołanie do stop 
+
+
+
+  }
+}
+
+
 function updatePostion() {
     console.log(snake.position);
-    boxes[(snake.position[0][0] + snake.position[0][1]) * table.rowsColumns].classList.remove("snake");
+    console.log(boxes[snake.position[0][0] + snake.position[0][1] * table.rowsColumns].classList.remove("snake"));
     snake.position.shift();
     var head = snake.position[snake.position.length - 1]; 
     console.log(head)
