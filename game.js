@@ -27,14 +27,11 @@ let snake = {
         snakeBoard.innerHTML = "";
         createTable();
         randomFood();
-
     }
  };
 
  snake.init();
  window.addEventListener("load", intervalMove);
- document.addEventListener("keydown", move);
-
 
 
 // creating table
@@ -92,7 +89,7 @@ function checkColissionWithFood(){
            clearInterval(interval);
         for(let i = 0; i < snake.position.length; i++) {
         boxes[snake.position[i][0] + snake.position[i][1] * table.rowsColumns].classList.remove("snake");
-    }   ;
+    };
         }
     }
 }
