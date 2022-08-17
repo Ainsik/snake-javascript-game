@@ -10,16 +10,16 @@ let table = {
 
 let snake = {
     direction: "right",
-    position: [[10,10]],
+    position: [[9,10],[10,10]],
     food: 0, 
     score: 0, 
     time: 0,
     canRotate: 0,
-    interval: 100,
+    interval: 500 ,
     init: function () {
         snake.direction = "right";
         snake.position = [[9,10],[10,10]];
-        snake.interval = 100;
+        snake.interval = 500;
         snake.food = 0;
         snake.score = 0;
         snake.time = 0;
@@ -30,8 +30,9 @@ let snake = {
  };
 
  snake.init();
+ window.addEventListener("load", intervalMove);
+ document.addEventListener("keydown", move);
 
-document.addEventListener("keydown", move);
 
 
 // creating table
@@ -64,8 +65,14 @@ function randomFood() {
     foodPosition = [randX,randY];
 }
 
+function intervalMove()
+{
+    setInterval(function (){
+        move();
+    },snake.interval)
+}
 function move() {
-    
+
     updatePostion();
     renderSnake();
     document.addEventListener("keydown", turn);
@@ -76,7 +83,8 @@ function move() {
 
 function updatePostion() {
     console.log(snake.position);
-    boxes[(snake.position[0][0] + snake.position[0][1]) * table.rowsColumns].classList.remove("snake");
+    boxes[snake.position[0][0] + snake.position[0][1] * table.rowsColumns].classList.remove("snake");
+    console.log(boxes[(snake.position[0][0] + snake.position[0][1]) * table.rowsColumns]);
     snake.position.shift();
     var head = snake.position[snake.position.length - 1]; 
     console.log(head)
