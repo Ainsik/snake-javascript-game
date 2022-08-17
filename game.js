@@ -15,23 +15,25 @@ let snake = {
     score: 0, 
     time: 0,
     canRotate: 0,
-    interval: 100,
+    interval: 500 ,
     init: function () {
         snake.direction = "right";
         snake.position = [[9,10],[10,10]];
-        snake.interval = 100;
+        snake.interval = 500;
         snake.food = 0;
         snake.score = 0;
         snake.time = 0;
         snakeBoard.innerHTML = "";
         createTable();
+        randomFood();
 
     }
  };
 
  snake.init();
+ window.addEventListener("load", intervalMove);
+ document.addEventListener("keydown", move);
 
-document.addEventListener("keydown", move);
 
 
 // creating table
@@ -61,17 +63,37 @@ function randomFood() {
     while (boxes[random].classList.contains("snake"))
 
     boxes[random].classList.add("food");
-    foodPosition = [randX,randY];
 }
 
+function intervalMove()
+{
+    setInterval(function (){
+        move();
+    },snake.interval)
+}
 function move() {
-    
     updatePostion();
     renderSnake();
+    checkColissionWithFood();
     document.addEventListener("keydown", turn);
     snake.canRotate = 1;
 }
-
+function checkColissionWithFood(){
+    let head = snake.position[snake.position.length - 1];
+    console.log(head)
+    if (boxes[head[0] + head[1] * table.rowsColumns].classList.contains("food")){
+        boxes[head[0] + head[1] * table.rowsColumns].classList.remove("food");
+        console.log("colission");
+        snake.position.unshift(snake.position[0]);
+        console.log(snake.position);
+        randomFood();
+    }
+    for (let i=0;  i<snake.position.length-1;i++) {
+        if (boxes[snake.position[i][0] + snake.position[i][1] * table.rowsColumns] === boxes[head[0] + head[1] * table.rowsColumns]) {
+           alert("You lose!");
+        }
+    }
+}
 
 
 function hitBorder() {
@@ -90,7 +112,12 @@ function hitBorder() {
 
 function updatePostion() {
     console.log(snake.position);
+<<<<<<< HEAD
     console.log(boxes[snake.position[0][0] + snake.position[0][1] * table.rowsColumns].classList.remove("snake"));
+=======
+    boxes[snake.position[0][0] + snake.position[0][1] * table.rowsColumns].classList.remove("snake");
+    console.log(boxes[(snake.position[0][0] + snake.position[0][1]) * table.rowsColumns]);
+>>>>>>> c91a8f07098fbee0bcc4fb422a5e93bfe6060577
     snake.position.shift();
     var head = snake.position[snake.position.length - 1]; 
     console.log(head)
