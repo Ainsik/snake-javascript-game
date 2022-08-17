@@ -74,17 +74,24 @@ function intervalMove()
 function move() {
     updatePostion();
     renderSnake();
-    checkColission();
+    checkColissionWithFood();
     document.addEventListener("keydown", turn);
     snake.canRotate = 1;
 }
-function checkColission(){
+function checkColissionWithFood(){
     let head = snake.position[snake.position.length - 1];
     console.log(head)
     if (boxes[head[0] + head[1] * table.rowsColumns].classList.contains("food")){
         boxes[head[0] + head[1] * table.rowsColumns].classList.remove("food");
         console.log("colission");
+        snake.position.unshift(snake.position[0]);
+        console.log(snake.position);
         randomFood();
+    }
+    for (let i=0;  i<snake.position.length-1;i++) {
+        if (boxes[snake.position[i][0] + snake.position[i][1] * table.rowsColumns] === boxes[head[0] + head[1] * table.rowsColumns]) {
+           alert("You lose!");
+        }
     }
 }
 
