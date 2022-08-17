@@ -5,14 +5,14 @@
   }
   
   .snakeBoard{
-    width: 845px;
-    height: 920px;
+    width: 846px;
+    height: 845px;
     margin:auto;
     display: flex;
     flex-direction: row;
     flex-wrap:wrap;
     justify-content:flex-start;
-    border: solid 1px green
+    border-style: solid;
   }
 
 
