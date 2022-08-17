@@ -25,6 +25,7 @@ let snake = {
         snake.time = 0;
         snakeBoard.innerHTML = "";
         createTable();
+        randomFood();
 
     }
  };
@@ -62,7 +63,6 @@ function randomFood() {
     while (boxes[random].classList.contains("snake"))
 
     boxes[random].classList.add("food");
-    foodPosition = [randX,randY];
 }
 
 function intervalMove()
@@ -72,13 +72,21 @@ function intervalMove()
     },snake.interval)
 }
 function move() {
-
     updatePostion();
     renderSnake();
+    checkColission();
     document.addEventListener("keydown", turn);
     snake.canRotate = 1;
 }
-
+function checkColission(){
+    let head = snake.position[snake.position.length - 1];
+    console.log(head)
+    if (boxes[head[0] + head[1] * table.rowsColumns].classList.contains("food")){
+        boxes[head[0] + head[1] * table.rowsColumns].classList.remove("food");
+        console.log("colission");
+        randomFood();
+    }
+}
 
 
 function updatePostion() {
