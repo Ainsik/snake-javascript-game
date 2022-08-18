@@ -3,6 +3,8 @@ let boxes = document.getElementsByClassName("box");
 let modul = document.querySelector('.modul');
 let start = document.querySelector('.start')
 const scoreDisplay = document.querySelector('span')
+const msg = document.querySelector(".over")
+
 let interval = 0
 let over = false
 let score = 0
@@ -165,9 +167,10 @@ function turn(e) {
 }
 
 function gameOver() {
-    alert("You lose!");
     clearInterval(interval);
     for(let i = 0; i < snake.position.length; i++) {
         boxes[snake.position[i][0] + snake.position[i][1] * table.rowsColumns].classList.remove("snake");
     }
+    msg.textContent = "YOU LOSE!";
+    msg.classList.add("lose")
 }
