@@ -3,7 +3,8 @@ let boxes = document.getElementsByClassName("box");
 let modul = document.querySelector('.modul');
 let start = document.querySelector('.start')
 let interval = 0
-
+let over = false
+console.log(over)
 let table = {
     rowsColumns: 21,
     box: 21*21
@@ -47,9 +48,12 @@ function createTable(){
 
 // render snake
 function renderSnake() {
-    for(let i = 0; i < snake.position.length; i++) {
-        boxes[snake.position[i][0] + snake.position[i][1] * table.rowsColumns].classList.add("snake");
-    };
+    if (over) gameOver()
+    else {
+        for (let i = 0; i < snake.position.length; i++) {
+            boxes[snake.position[i][0] + snake.position[i][1] * table.rowsColumns].classList.add("snake");
+        };
+    }
 };
 
 function randomFood() {
@@ -89,7 +93,8 @@ function checkColissionWithFood(){
     }
     for (let i=0;  i<snake.position.length-1;i++) {
         if (boxes[snake.position[i][0] + snake.position[i][1] * table.rowsColumns] === boxes[head[0] + head[1] * table.rowsColumns]) {
-    gameOver()
+    over = true;
+            gameOver();
     };
         }
 }
@@ -98,8 +103,12 @@ function checkColissionWithFood(){
 function hitBorder() {
   const headPos = snake.position.length-1;
   // goes of limits
-  if (((snake.position[headPos][0] === table.rowsColumns-1) && (snake.direction === "right")) || ((snake.position[headPos][0] === 0) && (snake.direction === "left")) || ((snake.position[headPos][1] === table.rowsColumns - 1) && (snake.direction === "down")) ||  ((snake.position[headPos][1] === 0) && (snake.direction === "up"))) {
-    gameOver()
+  if (((snake.position[headPos][0] === table.rowsColumns-1) && (snake.direction === "right")) ||
+      ((snake.position[headPos][0] === 0) && (snake.direction === "left")) ||
+      ((snake.position[headPos][1] === table.rowsColumns - 1) && (snake.direction === "down")) ||
+      ((snake.position[headPos][1] === 0) && (snake.direction === "up"))) {
+    over = true;
+      gameOver();
   }
 }
 
