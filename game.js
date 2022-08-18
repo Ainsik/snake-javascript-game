@@ -2,9 +2,11 @@ let snakeBoard = document.querySelector(".snakeBoard");
 let boxes = document.getElementsByClassName("box");
 let modul = document.querySelector('.modul');
 let start = document.querySelector('.start')
+const scoreDisplay = document.querySelector('span')
 let interval = 0
 let over = false
-console.log(over)
+let score = 0
+
 let table = {
     rowsColumns: 21,
     box: 21*21
@@ -74,14 +76,13 @@ function intervalMove()
     },snake.interval)
 }
 function move() {
-
-    checkColissionWithFood();
     hitBorder();
-
     updatePostion();
+    checkColissionWithFood();
     renderSnake();
     document.addEventListener("keydown", turn);
     snake.canRotate = 1;
+    scoreDisplay.innerText = score
 }
 
 function checkColissionWithFood(){
@@ -90,6 +91,8 @@ function checkColissionWithFood(){
         boxes[head[0] + head[1] * table.rowsColumns].classList.remove("food");
         snake.position.unshift(snake.position[0]);
         randomFood();
+        score++
+        scoreDisplay.textContent = score
     }
     for (let i=0;  i<snake.position.length-1;i++) {
         if (boxes[snake.position[i][0] + snake.position[i][1] * table.rowsColumns] === boxes[head[0] + head[1] * table.rowsColumns]) {
