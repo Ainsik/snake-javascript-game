@@ -72,6 +72,7 @@ function intervalMove()
 function move() {
     updatePostion();
     renderSnake();
+    hitBorder();
     checkColissionWithFood();
     document.addEventListener("keydown", turn);
     snake.canRotate = 1;
@@ -85,26 +86,17 @@ function checkColissionWithFood(){
     }
     for (let i=0;  i<snake.position.length-1;i++) {
         if (boxes[snake.position[i][0] + snake.position[i][1] * table.rowsColumns] === boxes[head[0] + head[1] * table.rowsColumns]) {
-           alert("You lose!");
-           clearInterval(interval);
-        for(let i = 0; i < snake.position.length; i++) {
-        boxes[snake.position[i][0] + snake.position[i][1] * table.rowsColumns].classList.remove("snake");
+    gameOver()
     };
         }
-    }
 }
 
 
 function hitBorder() {
-  var headPos = snake.position.length-1;
+  const headPos = snake.position.length-1;
   // goes of limits
-  if (((snake.position[headPos][0] === table.rowsCols-1) && (snake.direction === "right")) || ((snake.position[headPos][0] === 0) && (snake.direction === "left")) || ((snake.position[headPos][1] === table.rowsCols-1) && (snake.direction === "down")) ||  ((snake.position[headPos][1] === 0) && (snake.direction === "up"))) {
-
-
-        // tutaj wywołanie do stop
-
-
-
+  if (((snake.position[headPos][0] === table.rowsColumns-1) && (snake.direction === "right")) || ((snake.position[headPos][0] === 0) && (snake.direction === "left")) || ((snake.position[headPos][1] === table.rowsColumns-1) && (snake.direction === "down")) ||  ((snake.position[headPos][1] === 0) && (snake.direction === "up"))) {
+    gameOver()
   }
 }
 
@@ -157,3 +149,10 @@ function turn(e) {
     snake.canRotate = 0;
 }
 
+function gameOver() {
+    alert("You lose!");
+    clearInterval(interval);
+    for(let i = 0; i < snake.position.length; i++) {
+        boxes[snake.position[i][0] + snake.position[i][1] * table.rowsColumns].classList.remove("snake");
+    }
+}
