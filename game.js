@@ -176,3 +176,27 @@ function gameOver() {
     msg.textContent = "YOU LOSE!";
     msg.classList.add("lose")
 }
+function timer(){
+let countDownDate = new Date().getTime()
+
+
+let interval = setInterval(function () {
+    let now = new Date().getTime();
+
+    let distance =  now -countDownDate  ;
+
+
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+
+    document.querySelector(".timer").innerHTML = minutes + "m " + seconds + "s "
+
+
+
+
+
+
+
+}, 100);}
