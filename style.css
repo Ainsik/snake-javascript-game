@@ -32,3 +32,10 @@
  .food {
    background: blue;
   }
+
+.lose {
+    font-size: 150px;
+    color: crimson;
+    text-align: center;
+    border: 3px solid green;
+}

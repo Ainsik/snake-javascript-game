@@ -3,6 +3,8 @@ let boxes = document.getElementsByClassName("box");
 let modul = document.querySelector('.modul');
 let start = document.querySelector('.start')
 const scoreDisplay = document.querySelector('span')
+const msg = document.querySelector(".over")
+
 let interval = 0
 let over = false
 let score = 0
@@ -77,7 +79,6 @@ function intervalMove()
     },snake.interval)
 }
 function move() {
-
     hitBorder();
     updatePostion();
     checkColissionWithFood();
@@ -172,28 +173,6 @@ function gameOver() {
     for(let i = 0; i < snake.position.length; i++) {
         boxes[snake.position[i][0] + snake.position[i][1] * table.rowsColumns].classList.remove("snake");
     }
+    msg.textContent = "YOU LOSE!";
+    msg.classList.add("lose")
 }
-function timer(){
-let countDownDate = new Date().getTime()
-
-
-let interval = setInterval(function () {
-    let now = new Date().getTime();
-
-    let distance =  now -countDownDate  ;
-
-
-    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-
-
-    document.querySelector(".timer").innerHTML = minutes + "m " + seconds + "s "
-
-
-
-
-
-
-
-}, 100);}
