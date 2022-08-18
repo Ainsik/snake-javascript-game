@@ -70,13 +70,16 @@ function intervalMove()
     },snake.interval)
 }
 function move() {
+
+    checkColissionWithFood();
+    hitBorder();
+
     updatePostion();
     renderSnake();
-    hitBorder();
-    checkColissionWithFood();
     document.addEventListener("keydown", turn);
     snake.canRotate = 1;
 }
+
 function checkColissionWithFood(){
     let head = snake.position[snake.position.length - 1];
     if (boxes[head[0] + head[1] * table.rowsColumns].classList.contains("food")){
@@ -95,7 +98,7 @@ function checkColissionWithFood(){
 function hitBorder() {
   const headPos = snake.position.length-1;
   // goes of limits
-  if (((snake.position[headPos][0] === table.rowsColumns-1) && (snake.direction === "right")) || ((snake.position[headPos][0] === 0) && (snake.direction === "left")) || ((snake.position[headPos][1] === table.rowsColumns-1) && (snake.direction === "down")) ||  ((snake.position[headPos][1] === 0) && (snake.direction === "up"))) {
+  if (((snake.position[headPos][0] === table.rowsColumns-1) && (snake.direction === "right")) || ((snake.position[headPos][0] === 0) && (snake.direction === "left")) || ((snake.position[headPos][1] === table.rowsColumns - 1) && (snake.direction === "down")) ||  ((snake.position[headPos][1] === 0) && (snake.direction === "up"))) {
     gameOver()
   }
 }
