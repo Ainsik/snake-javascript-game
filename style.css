@@ -1,0 +1,42 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	padding-top: 5%;
+}
+
+.snakeBoard {
+	width: 847px;
+	height: 846px;
+	margin: auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	border-style: solid;
+}
+
+.box {
+	background: white;
+	border: solid 1px green;
+	width: 40px;
+	height: 40px;
+}
+
+.snake {
+	background: rgb(208, 10, 10);
+}
+
+.food {
+	background: blue;
+}
+
+.lose {
+	font-size: 150px;
+	color: crimson;
+	text-align: center;
+	border: 3px solid green;
+}
